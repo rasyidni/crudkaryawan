@@ -15,6 +15,12 @@
   <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+
+  <style type="text/css">
+    .barisActive {
+      background-color: blueviolet !important;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -125,17 +131,19 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Id</th>
+                    <th><input class='checkbox' type='checkbox'></th>
+                    <th>No</th>
                     <th>Nama</th>
+                    <th>Aksi</th>
                   </tr>
                   </thead>
-                  <tbody>
-                  
-                  </tbody>
+                  <tbody></tbody>
                   <tfoot>
                   <tr>
-                    <th>Id</th>
+                    <th><input class='checkbox' type='checkbox'></th>
+                    <th>No</th>
                     <th>Nama</th>
+                    <th>Aksi</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -203,14 +211,22 @@
       "type" : "POST"
 		},
 		"columns" : [
-			{"data" : "id_jabatan_karyawan"},
+      {"data" : "checkbox"},
+			{"data" : "no"},
 			{"data": "nama_jabatan_karyawan"},
+      {"data" : "aksi"},
 		],
     "dom" : 'lBfrtip',
     "buttons" : ["copy", "csv", "excel", "pdf", "print", "colvis"],
     "aaSorting": [[ 0, "desc" ]]
 	})
 });
+
+// Ketika checkbox di klik
+$('#example1 tbody').on('click', '.checkbox', function(){
+    $(this).parent().parent().toggleClass("barisActive");
+  })
+  // End ketika checkbox di klik
 
 </script>
 
