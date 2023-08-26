@@ -1,3 +1,20 @@
+<?php
+  include("config.php");
+
+  $dataKaryawan = $mysqli -> query(
+    "SELECT count(id_karyawan) as jumlah from karyawan"
+  );
+  $jumlah = $dataKaryawan -> fetch_array();
+  $jumlahKaryawan = $jumlah['jumlah'];
+
+  $dataJabatan = $mysqli -> query(
+    "SELECT count(id_jabatan_karyawan) as jumlah from jabatan_karyawan"
+  );
+  $jumlahj = $dataJabatan -> fetch_array();
+  $jumlahJabatan = $jumlahj['jumlah'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,12 +121,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Karyawan</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Karyawan</li>
             </ol>
           </div>
         </div>
@@ -126,9 +143,9 @@
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3><?php echo $jumlahKaryawan; ?></h3>
 
-                  <p>New Orders</p>
+                  <p>Jumlah Karyawan</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -141,14 +158,14 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+                  <h3><?php echo $jumlahJabatan ?></sup></h3>
 
-                  <p>Bounce Rate</p>
+                  <p>Jumlah Jabatan</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="jabatan/jabatan.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -156,9 +173,9 @@
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3><?php echo $jumlahKaryawan; ?></h3>
 
-                  <p>User Registrations</p>
+                  <p>Jumlah Karyawan</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
@@ -171,14 +188,14 @@
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>65</h3>
+                  <h3><?php echo $jumlahJabatan; ?></h3>
 
-                  <p>Unique Visitors</p>
+                  <p>Jumlah Jabatan</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="jabatan/jabatan.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
