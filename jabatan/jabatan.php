@@ -123,28 +123,6 @@
           <a href="tambahdata.php" type="button" class="btn btn-success mb-3">+ Tambah Data Jabatan</a>
           <div class="card">
 
-            <!-- menampilkan notifikasi untuk mengetahui apakah data berhasil ditambah atau di update -->
-            <?php
-            if (isset($_GET['alert'])) { ?>
-              <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h5><i class="icon fas fa-check"></i> Alert!</h5>
-                Data Berhasil Ditambah
-              </div>
-            <?php
-              unset($_GET['alert']);
-            } ?>
-            <?php
-            if (isset($_GET['hasil'])) { ?>
-              <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h5><i class="icon fas fa-check"></i> Alert!</h5>
-                Data Berhasil Di Update
-              </div>
-            <?php
-              unset($_GET['hasil']);
-            } ?>
-            <!-- menampilkan notifikasi untuk mengetahui apakah data berhasil ditambah atau di update -->
         <div class="row">
           <div class="col-12">
               
@@ -296,6 +274,37 @@ $('#example1 tbody').on('click', '.checkbox', function(){
   } ?>
   <!-- menampilkan notifikasi pada halamana index.php ketika data berhasil dihapus -->
 
+  <!-- menampilkan notifikasi pada halamana index.php ketika data berhasil ditambah -->
+  <?php if (@$_GET['alert']) { ?>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses',
+        text: 'Data Berhasil Ditambah',
+        timer: 3000,
+        showConfirmButton: false
+      })
+    </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_GET['alert']);
+  } ?>
+  <!-- menampilkan notifikasi pada halaman index.php ketika data berhasil ditambah -->
+
+  <!-- menampilkan notifikasi pada halaman index.php ketika data berhasil diupdate -->
+  <?php if (@$_GET['hasil']) { ?>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses',
+        text: 'Data Berhasil Di Update',
+        timer: 3000,
+        showConfirmButton: false
+      })
+    </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_GET['hasil']);
+  } ?>
+  <!-- menampilkan notifikasi pada halaman index.php ketika data berhasil diupdate -->
 
 </body>
 </html>
