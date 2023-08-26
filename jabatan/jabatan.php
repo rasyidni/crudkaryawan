@@ -192,14 +192,22 @@
 
   $(document).ready(function(){
 	$("#example1").DataTable({
+    "processing" : true,
+    "serverSide":true,
 		"ajax": {
-			"url" : "data.php",
-			"dataSrc": ""
+			"url" : "data.php?action=table_data",
+      error: function(jqXHR, ajaxOptions, thrownError) {
+                  alert(thrownError + "\r\n" + jqXHR.statusText + "\r\n" + jqXHR.responseText + "\r\n" + ajaxOptions.responseText);
+      },
+			"dataType": "json",
+      "type" : "POST"
 		},
 		"columns" : [
 			{"data" : "id_jabatan_karyawan"},
 			{"data": "nama_jabatan_karyawan"},
 		],
+    "dom" : 'lBfrtip',
+    "buttons" : ["copy", "csv", "excel", "pdf", "print", "colvis"],
     "aaSorting": [[ 0, "desc" ]]
 	})
 });
