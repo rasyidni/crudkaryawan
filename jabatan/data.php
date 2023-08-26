@@ -66,7 +66,7 @@
 				<p class='text-center'>
 					<a href='editdata.php?id=".$dataJabatan['id_jabatan_karyawan']."' type='button' class='btn btn-warning'>
 						<i class='fa fa-edit'></i></a> |
-					<a href='hapusdata.php?id=".$dataJabatan['id_jabatan_karyawan']."' type='button' class='btn btn-danger alert_notif'>
+					<a href='hapusdata.php?id=".$dataJabatan['id_jabatan_karyawan']."' type='button' class='btn btn-danger' onclick='return confirmAndDelete(event)'>
 						<i class='fa fa-trash'></i>
 					</a>
 				</p>

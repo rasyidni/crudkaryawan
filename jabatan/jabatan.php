@@ -119,6 +119,32 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        
+          <a href="tambahdata.php" type="button" class="btn btn-success mb-3">+ Tambah Data Jabatan</a>
+          <div class="card">
+
+            <!-- menampilkan notifikasi untuk mengetahui apakah data berhasil ditambah atau di update -->
+            <?php
+            if (isset($_GET['alert'])) { ?>
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                Data Berhasil Ditambah
+              </div>
+            <?php
+              unset($_GET['alert']);
+            } ?>
+            <?php
+            if (isset($_GET['hasil'])) { ?>
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                Data Berhasil Di Update
+              </div>
+            <?php
+              unset($_GET['hasil']);
+            } ?>
+            <!-- menampilkan notifikasi untuk mengetahui apakah data berhasil ditambah atau di update -->
         <div class="row">
           <div class="col-12">
               
@@ -195,9 +221,33 @@
 <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
+
+<!-- menampilkan notifikasi untuk konfirmasi sebelum menghapus data -->
+<script>
+function confirmAndDelete(event) {
+  var getLink = event.target.href;
+
+    Swal.fire({
+      title: "Data akan dihapus",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'Ya',
+      cancelButtonColor: '#3085d6',
+      cancelButtonText: "Batal"
+    }).then(result => {
+      if (result.isConfirmed) {
+        window.location.href = getLink;
+      }
+    });
+
+  return false;
+}
+</script>
+<!-- menampilkan notifikasi untuk konfirmasi sebelum menghapus data -->
+
 <!-- Page specific script -->
 <script>
-
   $(document).ready(function(){
 	$("#example1").DataTable({
     "processing" : true,
@@ -227,8 +277,25 @@ $('#example1 tbody').on('click', '.checkbox', function(){
     $(this).parent().parent().toggleClass("barisActive");
   })
   // End ketika checkbox di klik
-
 </script>
+
+  <!-- menampilkan notifikasi pada halamana index.php ketika data berhasil dihapus -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.7/dist/sweetalert2.all.min.js"></script>
+  <?php if (@$_GET['hapus']) { ?>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses',
+        text: 'data berhasil dihapus',
+        timer: 3000,
+        showConfirmButton: false
+      })
+    </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_GET['hapus']);
+  } ?>
+  <!-- menampilkan notifikasi pada halamana index.php ketika data berhasil dihapus -->
+
 
 </body>
 </html>

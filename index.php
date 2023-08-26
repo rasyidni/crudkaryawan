@@ -119,9 +119,99 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+
+      <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>150</h3>
+
+                  <p>New Orders</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                  <p>Bounce Rate</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3>44</h3>
+
+                  <p>User Registrations</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3>65</h3>
+
+                  <p>Unique Visitors</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+          </div>
+
+          <a href="karyawan/tambahdata.php" type="button" class="btn btn-success mb-3">+ Tambah Data Karyawan</a>
+          <div class="card">
+
+            <!-- menampilkan notifikasi untuk mengetahui apakah data berhasil ditambah atau di update -->
+            <?php
+            if (isset($_GET['alert'])) { ?>
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                Data Berhasil Ditambah
+              </div>
+            <?php
+              unset($_GET['alert']);
+            } ?>
+            <?php
+            if (isset($_GET['hasil'])) { ?>
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                Data Berhasil Di Update
+              </div>
+            <?php
+              unset($_GET['hasil']);
+            } ?>
+            <!-- menampilkan notifikasi untuk mengetahui apakah data berhasil ditambah atau di update -->
+
         <div class="row">
           <div class="col-12">
-              
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">DataTable with default features</h3>
@@ -201,9 +291,33 @@
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+
+<!-- menampilkan notifikasi untuk konfirmasi sebelum menghapus data -->
+<script>
+function confirmAndDelete(event) {
+  var getLink = event.target.href;
+
+    Swal.fire({
+      title: "Data akan dihapus",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'Ya',
+      cancelButtonColor: '#3085d6',
+      cancelButtonText: "Batal"
+    }).then(result => {
+      if (result.isConfirmed) {
+        window.location.href = getLink;
+      }
+    });
+
+  return false;
+}
+</script>
+<!-- menampilkan notifikasi untuk konfirmasi sebelum menghapus data -->
+
 <!-- Page specific script -->
 <script>
-
   $(document).ready(function(){
 	$("#example1").DataTable({
     "processing" : true,
@@ -238,6 +352,23 @@ $('#example1 tbody').on('click', '.checkbox', function(){
   // End ketika checkbox di klik
 
 </script>
+
+  <!-- menampilkan notifikasi pada halamana index.php ketika data berhasil dihapus -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.7/dist/sweetalert2.all.min.js"></script>
+  <?php if (@$_GET['hapus']) { ?>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Sukses',
+        text: 'data berhasil dihapus',
+        timer: 3000,
+        showConfirmButton: false
+      })
+    </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+  <?php unset($_GET['hapus']);
+  } ?>
+  <!-- menampilkan notifikasi pada halamana index.php ketika data berhasil dihapus -->
 
 </body>
 </html>

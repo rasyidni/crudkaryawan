@@ -78,7 +78,7 @@ if($_GET['action'] == "table_data"){
             $nestedData['aksi'] = "
             <a href='karyawan/editdata.php?id=".$dataKaryawan['id_karyawan']."' type='button' class='btn btn-warning'>
                 <i class='fa fa-edit'></i></a> |
-            <a href='karyawan/hapusdata.php?id='".$dataKaryawan['id_karyawan']."'&idj='".$dataKaryawan['id_jabatan_karyawan']."'&foto='".$dataKaryawan['foto']."' type='button' class='btn btn-danger alert_notif'>
+            <a href='karyawan/hapusdata.php?id=".$dataKaryawan['id_karyawan']."&idj=".$dataKaryawan['id_jabatan_karyawan']."&foto=".$dataKaryawan['foto']."' type='button' class='btn btn-danger' onclick='return confirmAndDelete(event)'>
                 <i class='fa fa-trash'></i>
             </a>
             ";
